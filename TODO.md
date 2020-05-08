@@ -9,6 +9,7 @@
 * Price alarm indicator. When price crosses threshold or other indicator triggered, use text to speech to trigger a repeating warning (alarm).
 * RSI indicator
 * OBV indicator
+* Parabolic SAR
 * We need to start backtesting strategies.
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
