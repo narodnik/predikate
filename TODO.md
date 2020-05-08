@@ -5,6 +5,7 @@
 * Price alarm indicator. When price crosses threshold or other indicator triggered, use text to speech to trigger a repeating warning (alarm).
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
+  * Try existing packages such as [this](https://github.com/hazelcast/hazelcast-jet-demos/tree/master/cryptocurrency-sentiment-analysis).
 * Improve montecarlo simulation
   * *"Modeling the price of Bitcoin with geometric fractional Brownian motion: a Monte Carlo approach"*
 * Yang-Zhang volatility
