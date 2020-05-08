@@ -2,9 +2,14 @@
   * Add to an existing matplotlib axis using `from mplfinance.original_flavor import candlestick2_ohlc`
   * Green up, red down
   * Candlesticks should be visible
+* Bollinger Bands
+* Average Directional Index (ADX)
+* Add volume to price charts (not below). See [this image](https://miro.medium.com/max/1400/1*aNoGhZzh-9DdM49VEkgIzw.png).
+* Add crosshairs to mouse cursor.
 * Price alarm indicator. When price crosses threshold or other indicator triggered, use text to speech to trigger a repeating warning (alarm).
 * RSI indicator
-* Bollinger Bands
+* OBV indicator
+* We need to start backtesting strategies.
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
   * Try existing packages such as [this](https://github.com/hazelcast/hazelcast-jet-demos/tree/master/cryptocurrency-sentiment-analysis).
