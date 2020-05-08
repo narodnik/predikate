@@ -2,6 +2,7 @@
   * Add to an existing matplotlib axis using `from mplfinance.original_flavor import candlestick2_ohlc`
   * Green up, red down
   * Candlesticks should be visible
+* Price alarm indicator. When price crosses threshold or other indicator triggered, use text to speech to trigger a repeating warning (alarm).
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
 * Improve montecarlo simulation
