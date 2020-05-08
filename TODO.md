@@ -7,9 +7,11 @@
 * Add volume to price charts (not below). See [this image](https://miro.medium.com/max/1400/1*aNoGhZzh-9DdM49VEkgIzw.png).
 * Add crosshairs to mouse cursor.
 * Price alarm indicator. When price crosses threshold or other indicator triggered, use text to speech to trigger a repeating warning (alarm).
-* RSI indicator
-* OBV indicator
-* Parabolic SAR
+* Other indicators:
+  * RSI indicator
+  * OBV indicator
+  * Parabolic SAR
+  * Pivot points
 * We need to start backtesting strategies.
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
