@@ -17,6 +17,7 @@
   * Other traders
 * Blockchain analysis
 * Econometric indicators
+* Bankroll management, R/R calculations
 * We need to start backtesting strategies.
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
