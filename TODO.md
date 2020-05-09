@@ -30,4 +30,5 @@
   * *"Drift-Independent Volatility Estimation Based on High, Low, Open, and Close Prices"*
 * Black-Scholes equation
   * Introduction to the book *"Volatility Trading"*
+  * Binomial tree, SABR, CEV, Heston
 
