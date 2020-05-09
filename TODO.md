@@ -19,6 +19,7 @@
 * Econometric indicators
 * Bankroll management, R/R calculations
 * We need to start backtesting strategies.
+  * Sharpe ratio > 2
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
   * Try existing packages such as [this](https://github.com/hazelcast/hazelcast-jet-demos/tree/master/cryptocurrency-sentiment-analysis).
