@@ -12,6 +12,11 @@
   * OBV indicator
   * Parabolic SAR
   * Pivot points
+* Gathering data:
+  * Historical data
+  * Other traders
+* Blockchain analysis
+* Econometric indicators
 * We need to start backtesting strategies.
 * Twitter sentiment analysis
   * See: *"Using correlated stochastic differential equations to forecast cryptocurrency rates and social media activities"*
