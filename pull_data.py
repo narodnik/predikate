@@ -41,6 +41,9 @@ last = last[0]
 def n_days_ago(n):
     return datetime.now(pytz.utc) - timedelta(days=n)
 
+def n_hours_ago(n):
+    return datetime.now(pytz.utc) - timedelta(hours=n)
+
 def date_from_string(datestring):
     date = datetime.strptime(start_time, "%Y-%m-%d %H:%M")
     date = pytz.utc.localize(start)
@@ -88,7 +91,6 @@ def pull(start=None, end=None, bin_size="1m", symbol="XBTUSD"):
         data_df = data_df.append(temp_df)
 
     data_df.set_index('timestamp', inplace=True)
-    print(data_df)
     return data_df
 
 def clean(self, df):

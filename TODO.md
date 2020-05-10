@@ -1,7 +1,7 @@
-* Change price lines on macd indicator to candlesticks.
-  * Add to an existing matplotlib axis using `from mplfinance.original_flavor import candlestick2_ohlc`
-  * Green up, red down
-  * Candlesticks should be visible
+* ~~~Change price lines on macd indicator to candlesticks.~~~
+  * ~~Add to an existing matplotlib axis using `from mplfinance.original_flavor import candlestick2_ohlc`~~~
+  * ~~Green up, red down~~~
+  * ~~Candlesticks should be visible~~~
 * Bollinger Bands
 * Average Directional Index (ADX)
 * Add volume to price charts (not below). See [this image](https://miro.medium.com/max/1400/1*aNoGhZzh-9DdM49VEkgIzw.png).

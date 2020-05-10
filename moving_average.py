@@ -1,11 +1,20 @@
+import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from pull_data import n_days_ago, pull
+from mplfinance.original_flavor import candlestick_ohlc
+from pull_data import n_days_ago, n_hours_ago, pull
 
-df = pull(start=n_days_ago(10))
+#df = pull(start=n_days_ago(200), bin_size='1d')
+#df.to_pickle("bitmex-daily-200d.pkl")
+
+#df = pull(start=n_hours_ago(4))
+#df.to_pickle("bitmex.pkl")
+
+df = pull(start=n_days_ago(5))
 df.to_pickle("bitmex.pkl")
 
+#df = pd.read_pickle("bitmex-daily-200d.pkl")
 df = pd.read_pickle("bitmex.pkl")
 # bin size = 1 minute
 # window = time / bin_size
@@ -17,8 +26,12 @@ df = pd.read_pickle("bitmex.pkl")
 #df["sma-5day"] = df["vwap"].rolling(window=window).mean()
 
 short_window = 5 * 60
-df["ema-5hr"] = df["vwap"].ewm(span=short_window).mean()
 long_window = 1 * 24 * 60
+# Long term
+#short_window = 5
+#long_window = 20
+
+df["ema-5hr"] = df["vwap"].ewm(span=short_window).mean()
 df["ema-1day"] = df["vwap"].ewm(span=long_window).mean()
 
 df["signal"] = 0.0
@@ -27,8 +40,8 @@ df["position"] = df["signal"].diff()
 
 df["macd"] = df["ema-5hr"] - df["ema-1day"]
 
-df.rename(columns = {'vwap':'price'}, inplace=True)
-df = df[n_days_ago(5):]
+#df.rename(columns = {'vwap':'price'}, inplace=True)
+#df = df[n_days_ago(5):]
 
 #plt.grid(True)
 #plt.plot(df["price"], label="price")
@@ -41,8 +54,22 @@ fig, (ax1, ax2) = plt.subplots(2, sharex=True,
     gridspec_kw={'hspace': 0, "height_ratios": [3, 1]})
 
 ax1.set_title("BTC-USD Adj Close Price")
-ax1.plot(df.index, df["price"], lw=1, alpha=0.8,
-         label="Bitcoin Price (BitMex)")
+
+#ax1.plot(df.index, df["vwap"], lw=1, alpha=0.8,
+#         label="Bitcoin Price (BitMex)")
+
+dfn = df.resample('60min').agg({'open': 'first',
+                                'high': 'max',
+                                'low': 'min',
+                                'close': 'last'})
+dfn["open_adj"] = np.where(dfn.open < dfn.low, dfn.low,
+                           np.where(dfn.open > dfn.high, dfn.high,
+                                    dfn.open))
+
+quotes = zip(mdates.date2num(dfn.index.to_pydatetime()),
+             dfn.open_adj, dfn.high, dfn.low, dfn.close)
+candlestick_ohlc(ax1, quotes, width=0.01, colorup='g')
+
 ax1.plot(df.index, df["ema-5hr"], lw=3, alpha=0.8,
          label="EMA (Exponential Moving Average) - 5 hours")
 ax1.plot(df.index, df["ema-1day"], lw=3, alpha=0.8,

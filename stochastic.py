@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from pull_data import n_days_ago, pull
+#from pull_data import n_days_ago, pull
 
 #df = pull(start=n_days_ago(10))
 #df.to_pickle("bitmex.pkl")
@@ -10,6 +10,10 @@ df = pd.read_pickle("bitmex.pkl")
 lookback = 14 * 60
 d_fast_period = 3 * 60
 d_slow_period = 3 * 60
+
+#lookback = 48 * 60
+#d_fast_period = 3 * 60
+#d_slow_period = 6 * 60
 
 lows = df["low"].rolling(lookback).min()
 highs = df["high"].rolling(lookback).max()

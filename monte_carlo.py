@@ -13,8 +13,8 @@ mean, stddev = percent_changes.mean(), percent_changes.std()
 
 plt.style.use('dark_background')
 
-current_price = 8880
-liquidation_price = 6020
+current_price = 10000
+liquidation_price = 7000
 
 total = 1000
 count = 0
