@@ -1,9 +1,11 @@
+import matplotlib
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from mplfinance.original_flavor import candlestick_ohlc
 from pull_data import n_days_ago, n_hours_ago, pull
+import crosshair
 
 #df = pull(start=n_days_ago(200), bin_size='1d')
 #df.to_pickle("bitmex-daily-200d.pkl")
@@ -61,7 +63,8 @@ ax1.set_title("BTC-USD Adj Close Price")
 dfn = df.resample('60min').agg({'open': 'first',
                                 'high': 'max',
                                 'low': 'min',
-                                'close': 'last'})
+                                'close': 'last',
+                                'vwap': 'mean'})
 dfn["open_adj"] = np.where(dfn.open < dfn.low, dfn.low,
                            np.where(dfn.open > dfn.high, dfn.high,
                                     dfn.open))
@@ -83,12 +86,33 @@ ax1.plot(df.loc[df["position"] == -1.0].index,
          df["ema-5hr"][df["position"] == -1.0],
          'v', markersize=10, color='#555555', label="Sell signal")
 
+last_price_text = "Last price: %1.2f" % df.iloc[-1].close
+ax1.text(0.7, 0.86, last_price_text, transform=ax1.transAxes)
+
 ax1.grid(which='major', color='#666666', linestyle=':')
 ax1.minorticks_on()
 ax1.grid(which='minor', color='#999999', linestyle='-', alpha=0.2)
 
 ax1.yaxis.set_label_position("right")
 ax1.yaxis.tick_right()
+ax1.set_zorder(2)
+ax1.patch.set_visible(False)
+
+dfn_index = mdates.date2num(dfn.index.to_pydatetime())
+snap_cursor = crosshair.SnaptoCursor(ax1, dfn_index, dfn.vwap)
+fig.canvas.mpl_connect('motion_notify_event', snap_cursor.mouse_move)
+
+vol = df.resample('60min').agg({'volume': 'sum'})
+ax1_twin = ax1.twinx()
+ax1_twin.bar(vol.index, vol["volume"], width=0.025, alpha=0.4, zorder=1)
+ax1_twin.set_zorder(1)
+ax1_twin.get_yaxis().set_major_formatter(
+    matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+
+ax1.yaxis.set_label_position('right')
+ax1.yaxis.set_ticks_position('right')
+ax1_twin.yaxis.set_label_position('left')
+ax1_twin.yaxis.set_ticks_position('left')
 
 macd = df["macd"].iloc[::100]
 ax2.set_title("MACD indicator")
@@ -96,6 +120,10 @@ ax2.bar(macd.index, macd, width=0.01)
 
 #plt.tick_params(labelsize=12)
 fig.legend(loc='upper left', fontsize=12)
-plt.savefig("images/macd.png")
+#plt.savefig("images/macd.png")
+
+mng = plt.get_current_fig_manager()
+mng.window.showMaximized()
+#mng.frame.Maximize(True)
 plt.show()
 
