@@ -4,8 +4,8 @@
   * ~~Candlesticks should be visible~~
 * Bollinger Bands
 * Average Directional Index (ADX)
-* Add volume to price charts (not below). See [this image](https://miro.medium.com/max/1400/1*aNoGhZzh-9DdM49VEkgIzw.png).
-* Add crosshairs to mouse cursor.
+* ~~Add volume to price charts (not below). See [this image](https://miro.medium.com/max/1400/1*aNoGhZzh-9DdM49VEkgIzw.png).~~
+* ~~Add crosshairs to mouse cursor.~~
 * Price alarm indicator. When price crosses threshold or other indicator triggered, use text to speech to trigger a repeating warning (alarm).
 * Other indicators:
   * RSI indicator
