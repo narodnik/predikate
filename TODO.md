@@ -16,6 +16,8 @@
   * Historical data
   * Other traders
 * Blockchain analysis
+  * Coin age
+  * Daily active addresses
 * Econometric indicators
 * Bankroll management, R/R calculations
 * We need to start backtesting strategies.
