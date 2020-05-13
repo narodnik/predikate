@@ -74,21 +74,21 @@ quotes = zip(mdates.date2num(dfn.index.to_pydatetime()),
 candlestick_ohlc(ax1, quotes, width=0.01, colorup='g')
 
 ema_fast_plot = ax1.plot(
-    df.index, df["ema-5hr"], lw=3, alpha=0.8,
+    df.index, df["ema-5hr"], lw=1, alpha=0.8,
     label="EMA (Exponential Moving Average) - 5 hours")
 ema_slow_plot = ax1.plot(
-    df.index, df["ema-1day"], lw=3, alpha=0.8,
+    df.index, df["ema-1day"], lw=1, alpha=0.8,
     label="EMA 1 day")
 
 buy_signal_plot = ax1.plot(
     df.loc[df["position"] == 1.0].index, 
     df["ema-5hr"][df["position"] == 1.0],
-    '^', markersize=10, color='r', label="Buy signal")
+    '^', markersize=10, color='#009900', label="Buy signal")
          
 sell_signal_plot = ax1.plot(
     df.loc[df["position"] == -1.0].index, 
     df["ema-5hr"][df["position"] == -1.0],
-    'v', markersize=10, color='#555555', label="Sell signal")
+    'v', markersize=10, color='#990000', label="Sell signal")
 
 last_price_text = "Last price: %1.2f" % df.iloc[-1].close
 ax1.text(0.7, 0.86, last_price_text, transform=ax1.transAxes)
