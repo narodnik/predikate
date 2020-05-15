@@ -19,6 +19,7 @@
   * Coin age
   * Daily active addresses
 * Econometric indicators
+  * Forward future prices
 * Bankroll management, R/R calculations
 * We need to start backtesting strategies.
   * Sharpe ratio > 2
