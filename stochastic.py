@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-#from pull_data import n_days_ago, pull
+from pull_data import n_days_ago, pull
 
-#df = pull(start=n_days_ago(10))
-#df.to_pickle("bitmex.pkl")
+df = pull(start=n_days_ago(10))
+df.to_pickle("bitmex.pkl")
 
 df = pd.read_pickle("bitmex.pkl")
 
