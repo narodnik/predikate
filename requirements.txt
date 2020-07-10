@@ -32,4 +32,4 @@ toml==0.10.1
 typing-extensions==3.7.4.2
 urllib3==1.25.9
 webcolors==1.11.1
-
+yahoo-finance==1.4.0
