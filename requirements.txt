@@ -10,11 +10,13 @@ jsonpointer==2.0
 jsonref==0.2
 jsonschema==3.2.0
 kiwisolver==1.2.0
+lxml==4.5.2
 matplotlib==3.2.2
 monotonic==1.5
 mplfinance==0.12.6a3
 msgpack==1.0.0
 msgpack-python==0.5.6
+multitasking==0.0.9
 numpy==1.19.0
 pandas==1.0.5
 pyparsing==2.4.7
@@ -32,4 +34,4 @@ toml==0.10.1
 typing-extensions==3.7.4.2
 urllib3==1.25.9
 webcolors==1.11.1
-yahoo-finance==1.4.0
+yfinance==0.1.54
