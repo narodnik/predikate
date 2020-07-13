@@ -5,13 +5,13 @@ import  yfinance as yf
 from datetime import timedelta, datetime
 
 #number of days
-n = 10
+n = 200
 
 # get stock data from yahoo finance
 stock = yf.Ticker("GOOG")
 dfyh = stock.history(period=f"{n+10}d", interval="1d")
 dfyh = dfyh.filter(['Close'], axis=1)
-dfyh = dfyh.rename(columns={"Close" : "yh_close"})
+dfyh = dfyh.rename(columns={"Close" : "goog_close"})
 
 # set timezone to None in dfyh
 dfyh.index = dfyh.index.tz_localize(tz=None)
@@ -30,12 +30,15 @@ dfbtc = dfbtc.filter(['close'], axis=1)
 dfbtc = dfbtc.rename(columns={"close" : "btc_close"})
 
 df = dfbtc.join(dfyh)
-df = df[df['yh_close'] > 0]
+df = df[df['goog_close'] > 0]
+
+df.btc_close = df.btc_close / df.btc_close.max()
+df.goog_close = df.goog_close / df.goog_close.max()
 
 # test
 corr = pd.DataFrame()
-corr['corr'] = df['btc_close'].rolling(10).corr(df['yh_close'])
-corr = corr[corr['corr'] > 0]
+corr['corr'] = df['btc_close'].rolling(40).corr(df['goog_close'])
+#corr = corr[corr['corr'] > 0]
 
 period_time =  (start_date + timedelta(12)).strftime("%y%y/%m/%d")
 
@@ -49,7 +52,9 @@ fig, (ax1, ax2) = plt.subplots(2, sharex=True,
 # ax1
 ax1.set_title("BTC-USD Adj Close Price")
 ax1.plot(df.index, df["btc_close"], lw=2, alpha=0.8,
-        label="Bitcoin Price (BitMex)")
+        label="Bitcoin Price (BitMex/Normalized)")
+ax1.plot(df.index, df["goog_close"], lw=2, alpha=0.8,
+        label="Google Price")
 ax1.grid(which='major', color='#666666', linestyle=':')
 ax1.minorticks_on()
 ax1.grid(which='minor', color='#999999', linestyle='-', alpha=0.2)

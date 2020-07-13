@@ -5,7 +5,7 @@ import pandas as pd
 import random
 from pull_data import n_days_ago, pull
 
-current_price = 10100
+current_price = 9300
 
 df = pull(start=n_days_ago(45), bin_size="1d")
 df.to_pickle("bitmex-daily-60d.pkl")

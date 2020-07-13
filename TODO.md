@@ -1,3 +1,5 @@
+* Correlation with stocks (Apple, Uber, S&P 500)
+* Bitcoin/cryptos dominance over time and total market cap
 * ~~Change price lines on macd indicator to candlesticks.~~
   * ~~Add to an existing matplotlib axis using `from mplfinance.original_flavor import candlestick2_ohlc`~~
   * ~~Green up, red down~~
