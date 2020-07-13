@@ -6,10 +6,11 @@ from datetime import timedelta, datetime
 
 #number of days
 n = 200
+nm_rolling = 40
 
 # get stock data from yahoo finance
 stock = yf.Ticker("GOOG")
-dfyh = stock.history(period=f"{n+10}d", interval="1d")
+dfyh = stock.history(period=f"{n+nm_rolling}d", interval="1d")
 dfyh = dfyh.filter(['Close'], axis=1)
 dfyh = dfyh.rename(columns={"Close" : "goog_close"})
 
@@ -30,17 +31,17 @@ dfbtc = dfbtc.filter(['close'], axis=1)
 dfbtc = dfbtc.rename(columns={"close" : "btc_close"})
 
 df = dfbtc.join(dfyh)
-df = df[df['goog_close'] > 0]
+df = df.dropna()
 
 df.btc_close = df.btc_close / df.btc_close.max()
 df.goog_close = df.goog_close / df.goog_close.max()
 
 # test
 corr = pd.DataFrame()
-corr['corr'] = df['btc_close'].rolling(40).corr(df['goog_close'])
-#corr = corr[corr['corr'] > 0]
+corr['corr'] = df['btc_close'].rolling(nm_rolling).corr(df['goog_close'])
+corr = corr.dropna()
 
-period_time =  (start_date + timedelta(12)).strftime("%y%y/%m/%d")
+period_time =  (start_date + timedelta(nm_rolling)).strftime("%y%y/%m/%d")
 
 df = df[df.index  > period_time]
 
