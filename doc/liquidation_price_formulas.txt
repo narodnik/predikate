@@ -1,0 +1,16 @@
+This calculation is approx but less than 0.5% accurate than the real calculation
+which is way more complex. See liquidation_price.py in the root of this project
+for the real formulas. This is good enough for everyday use.
+
+entry_price = ...
+quantity = ...
+leverage = ... (for example 10 for 10x)
+
+order_value = quantity / entry_price
+
+cost = order_value / leverage
+
+price = (order_value + cost) / quantity
+
+liquidation_price = 1 / price
+
