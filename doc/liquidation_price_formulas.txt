@@ -6,11 +6,5 @@ entry_price = ...
 quantity = ...
 leverage = ... (for example 10 for 10x)
 
-order_value = quantity / entry_price
-
-cost = order_value / leverage
-
-price = (order_value + cost) / quantity
-
-liquidation_price = 1 / price
+liquidation_price = entry_price * leverage / (leverage + 1)
 

@@ -71,17 +71,7 @@ def calc_super_approx_liquidation_price():
     print("====================================")
     print("SUPER APPROX LIQUIDATION PRICE")
     print("")
-    order_value = quantity / entry_price
-    print("order_value:", order_value)
-
-    cost = order_value * initial_margin_requirement
-    print("cost:", cost)
-
-    # We round down but this is a negative number so we use ceil instead
-    price = (order_value + cost) / quantity
-    print("price:", price)
-
-    liquidation_price = 1 / price
+    liquidation_price = entry_price * leverage / (leverage + 1)
     print("liquidation_price:", liquidation_price)
     print("====================================")
     return liquidation_price
