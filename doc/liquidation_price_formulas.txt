@@ -8,3 +8,16 @@ leverage = ... (for example 10 for 10x)
 
 liquidation_price = entry_price * leverage / (leverage + 1)
 
+With Margin
+###########
+
+Formula is slightly more complicated:
+
+order_value = quantity / entry_price
+
+                                        quantity
+liquidation_price =  ----------------------------------------------
+                                      order_value
+                       order_value + ------------- + added_margin
+                                       leverage
+
