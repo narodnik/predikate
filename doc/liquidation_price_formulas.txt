@@ -13,11 +13,20 @@ With Margin
 
 Formula is slightly more complicated:
 
-order_value = quantity / entry_price
+  order_value = quantity / entry_price
+  liquidation_value = quantity / liquidation_price
+  initial_margin = order_value / leverage
 
-                                        quantity
-liquidation_price =  ----------------------------------------------
-                                      order_value
-                       order_value + ------------- + added_margin
-                                       leverage
+We then have to calculate using the PNL equation so loss is not greater than margin (or BitMex will lose money since we are bankrupt):
+
+  order_value - liquidation_value = -(added_margin + initial_margin)
+
+Use this equation to find liquidation_value, then convert to liquidation_price.
+
+The final formulas are:
+
+  order_value = quantity / entry_price
+  initial_margin = order_value / leverage
+  liquidation_value = order_value + added_margin + initial_margin
+  liquidation_price = quantity / liquidation_value
 

@@ -75,10 +75,13 @@ def calc_super_approx_liquidation_price_with_margin():
     order_value = quantity / entry_price
     print("order_value:", order_value)
 
-    price = order_value + order_value / leverage + added_margin
-    print("price:", price)
+    initial_margin = order_value / leverage
+    print("initial_margin:", initial_margin)
 
-    liquidation_price = quantity / price
+    liquidation_value = order_value + added_margin + initial_margin
+    print("liquidation_value:", liquidation_value)
+
+    liquidation_price = quantity / liquidation_value
     print("liquidation_price:", liquidation_price)
     print("====================================")
     return liquidation_price
