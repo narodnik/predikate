@@ -1,0 +1,32 @@
+This calculation is approx but less than 0.5% accurate than the real calculation
+which is way more complex. See liquidation_price.py in the root of this project
+for the real formulas. This is good enough for everyday use.
+
+entry_price = ...
+quantity = ...
+leverage = ... (for example 10 for 10x)
+
+liquidation_price = entry_price * leverage / (leverage + 1)
+
+With Margin
+###########
+
+Formula is slightly more complicated:
+
+  order_value = quantity / entry_price
+  liquidation_value = quantity / liquidation_price
+  initial_margin = order_value / leverage
+
+We then have to calculate using the PNL equation so loss is not greater than margin (or BitMex will lose money since we are bankrupt):
+
+  order_value - liquidation_value = -(added_margin + initial_margin)
+
+Use this equation to find liquidation_value, then convert to liquidation_price.
+
+The final formulas are:
+
+  order_value = quantity / entry_price
+  initial_margin = order_value / leverage
+  liquidation_value = order_value + added_margin + initial_margin
+  liquidation_price = quantity / liquidation_value
+
