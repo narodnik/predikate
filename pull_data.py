@@ -31,13 +31,6 @@ bitmex_client = bitmex(
 #    reverse=False).result()[0]
 #first = first[0]
 
-last = bitmex_client.Trade.Trade_getBucketed(
-    symbol="XBTUSD",
-    binSize="1m",
-    count=1,
-    reverse=True).result()[0]
-last = last[0]
-
 def n_days_ago(n):
     return datetime.now(pytz.utc) - timedelta(days=n)
 
@@ -50,6 +43,13 @@ def date_from_string(datestring):
     return date
 
 def pull(start=None, end=None, bin_size="1m", symbol="XBTUSD"):
+    last = bitmex_client.Trade.Trade_getBucketed(
+        symbol=symbol,
+        binSize="1m",
+        count=1,
+        reverse=True).result()[0]
+    last = last[0]
+
     if start is None:
         start = n_days_ago(5)
 

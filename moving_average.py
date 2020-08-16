@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from mplfinance.original_flavor import candlestick_ohlc
 from pull_data import n_days_ago, n_hours_ago, pull
-import crosshair
+#import crosshair
 
 #df = pull(start=n_days_ago(200), bin_size='1d')
 #df.to_pickle("bitmex-daily-200d.pkl")
@@ -13,7 +13,10 @@ import crosshair
 #df = pull(start=n_hours_ago(4))
 #df.to_pickle("bitmex.pkl")
 
-df = pull(start=n_days_ago(5))
+symbol = "XBTUSD"
+#symbol = "ETHUSD"
+
+df = pull(start=n_days_ago(5), symbol=symbol)
 df.to_pickle("bitmex.pkl")
 
 #df = pd.read_pickle("bitmex-daily-200d.pkl")
@@ -91,7 +94,7 @@ sell_signal_plot = ax1.plot(
     'v', markersize=10, color='#990000', label="Sell signal")
 
 last_price_text = "Last price: %1.2f" % df.iloc[-1].close
-ax1.text(0.7, 0.86, last_price_text, transform=ax1.transAxes)
+ax1.text(0.7, 0.86, last_price_text, transform=ax1.transAxes, fontsize=15)
 
 ax1.grid(which='major', color='#666666', linestyle=':')
 ax1.minorticks_on()
@@ -102,9 +105,9 @@ ax1.yaxis.tick_right()
 ax1.set_zorder(2)
 ax1.patch.set_visible(False)
 
-dfn_index = mdates.date2num(dfn.index.to_pydatetime())
-snap_cursor = crosshair.SnaptoCursor(ax1, dfn_index, dfn.vwap)
-fig.canvas.mpl_connect('motion_notify_event', snap_cursor.mouse_move)
+#dfn_index = mdates.date2num(dfn.index.to_pydatetime())
+#snap_cursor = crosshair.SnaptoCursor(ax1, dfn_index, dfn.vwap)
+#fig.canvas.mpl_connect('motion_notify_event', snap_cursor.mouse_move)
 
 vol = df.resample('60min').agg({'volume': 'sum'})
 ax1_twin = ax1.twinx()

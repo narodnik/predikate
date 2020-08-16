@@ -5,9 +5,9 @@ import pandas as pd
 import random
 from pull_data import n_days_ago, pull
 
-current_price = 9300
+current_price = 11000
 
-df = pull(start=n_days_ago(45), bin_size="1d")
+df = pull(start=n_days_ago(60), bin_size="1d")
 df.to_pickle("bitmex-daily-60d.pkl")
 
 df = pd.read_pickle("bitmex-daily-60d.pkl")
@@ -30,7 +30,7 @@ def run_single_simulation(start_price, stop_price):
     return price
 
 def run_simulations(start_price, stop_price):
-    total = 20000
+    total = 200000
     prices = []
     for i in range(total):
         price = run_single_simulation(start_price, stop_price)
@@ -41,7 +41,7 @@ def simulate_pnls():
     xvalues = []
     yvalues = []
 
-    for stop_price in range(2000, current_price, 500):
+    for stop_price in range(8000, current_price, 200):
         print("Running simulation for stop_price:", stop_price)
         end_prices = run_simulations(current_price, stop_price)
 
@@ -65,25 +65,25 @@ def pnl_histogram_data(stop_price):
         pnls.append(pnl)
     return pnls
 
-#xvalues, yvalues = simulate_pnls()
+xvalues, yvalues = simulate_pnls()
 
 plt.style.use('dark_background')
 
-#plt.title("Average PNL for different liquidation prices. Start price=%s" %
-#    current_price)
+plt.title("Average PNL for different liquidation prices. Start price=%s" %
+    current_price)
 
-plt.title("Distribution of PNL outcomes frequencies vs stop prices")
+#plt.title("Distribution of PNL outcomes frequencies vs stop prices")
 
 ax = plt.gca()
 ax.yaxis.set_label_position("right")
 ax.yaxis.tick_right()
 
-for stop_price in [8000, 8500, 9000]:
-    pnls = pnl_histogram_data(stop_price)
-    ax.hist(pnls, bins=100, alpha=0.5, label="Stop: %s" % stop_price)
+#for stop_price in [8500, 8750, 9000]:
+#    pnls = pnl_histogram_data(stop_price)
+#    ax.hist(pnls, bins=100, alpha=0.5, label="Stop: %s" % stop_price)
 
-#ax.plot(xvalues, yvalues)
+ax.plot(xvalues, yvalues)
 
-plt.legend()
+#plt.legend()
 plt.show()
 

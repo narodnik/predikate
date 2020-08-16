@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 
-start_price = 9270
-n_contracts = 85000
-margin = 2.22
+start_price = 10826.34
+n_contracts = 180118
+margin = 1.8109
 
 def pnl(exit_price):
     rpnl = n_contracts * (1/start_price - 1/exit_price) * exit_price

@@ -1,3 +1,6 @@
+* Variance
+* Covariance
+* Highest return coins
 * Correlation with stocks (Apple, Uber, S&P 500)
 * Bitcoin/cryptos dominance over time and total market cap
 * ~~Change price lines on macd indicator to candlesticks.~~
