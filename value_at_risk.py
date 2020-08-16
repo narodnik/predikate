@@ -22,10 +22,28 @@ df = df.dropna()
 
 minutes_in_a_month = 60 * 24 * 30
 
-print("BTC log mean (1 month):", df.btc_logret.mean() * minutes_in_a_month)
-print("ETH log mean (1 month):", df.eth_logret.mean() * minutes_in_a_month)
-print("BTC variance (1 month):", df.btc_logret.var() * minutes_in_a_month)
-print("ETH variance (1 month):", df.eth_logret.var() * minutes_in_a_month)
+monthly_btc_mean_gain = math.e**(df.btc_logret.mean() * minutes_in_a_month)
+monthly_eth_mean_gain = math.e**(df.eth_logret.mean() * minutes_in_a_month)
+
+print("BTC monthly average gain in 1 month: %.0f %%" %
+    (monthly_btc_mean_gain * 100))
+print("ETH monthly average gain in 1 month: %.0f %%" %
+    (monthly_eth_mean_gain * 100))
+
+monthly_btc_var = df.btc_logret.var() * minutes_in_a_month
+monthly_eth_var = df.eth_logret.var() * minutes_in_a_month
+
+monthly_btc_stddev = math.sqrt(monthly_btc_var)
+monthly_eth_stddev = math.sqrt(monthly_eth_var)
+
+print("BTC standard deviation (1 month):", monthly_btc_stddev)
+print("ETH standard deviation (1 month):", monthly_eth_stddev)
+
+gain_ratio = monthly_eth_mean_gain / monthly_btc_mean_gain
+print("Ethereum is %.0f %% more profitable than Bitcoin" % (gain_ratio * 100))
+risk_ratio = monthly_eth_stddev / monthly_btc_stddev
+print("But the ratio of risk is %.0f %%" % (risk_ratio * 100))
+
 print("Covariance (1 month):")
 print(df.cov() * minutes_in_a_month)
 
