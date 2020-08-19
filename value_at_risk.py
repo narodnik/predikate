@@ -33,8 +33,14 @@ print("ETH monthly average gain in 1 month: %.0f %%" %
 monthly_btc_var = df.btc_logret.var() * minutes_in_a_month
 monthly_eth_var = df.eth_logret.var() * minutes_in_a_month
 
+print("BTC variance:", monthly_btc_var)
+print("ETH variance:", monthly_eth_var)
+
 monthly_btc_stddev = math.sqrt(monthly_btc_var)
 monthly_eth_stddev = math.sqrt(monthly_eth_var)
+
+monthly_btc_stddev = math.e**-monthly_btc_stddev
+monthly_eth_stddev = math.e**-monthly_eth_stddev
 
 print("BTC standard deviation (1 month):", monthly_btc_stddev)
 print("ETH standard deviation (1 month):", monthly_eth_stddev)
@@ -56,6 +62,12 @@ print("+/- z sigma:", btc_interval)
 current_price = 11850
 lower_bound = current_price * math.e**-btc_interval
 print("lower bound:", lower_bound)
+
+btc_mean = df.btc_logret.mean() * minutes_in_a_month
+conf_low = current_price * math.e**(btc_mean - btc_interval) 
+conf_high = current_price * math.e**(btc_mean + btc_interval) 
+
+print("confidence: [%.0f, %.0f]" % (conf_low, conf_high))
 
 monthly_logreturn = df.btc_logret.mean() * minutes_in_a_month
 next_avg_price = current_price * math.e**monthly_logreturn
