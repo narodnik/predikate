@@ -23,20 +23,26 @@ df = pd.concat([df_btc.btc_returns, df_eth.eth_returns], axis=1)
 df = df.dropna()
 
 df["delta"] = df.eth_returns / df.btc_returns
-delta = df.delta.replace([np.inf, -np.inf], np.nan).dropna()
-print(delta)
-print("Delta (mean):", delta.mean())
-print("Delta (median):", delta.median())
+df.delta.replace([np.inf, -np.inf], np.nan, inplace=True)
+df.dropna(inplace=True)
+
+df["gamma"] = (df.delta - df.delta.shift(1)) / df.btc_returns
+df.dropna(inplace=True)
+print("Delta (mean):", df.delta.mean())
+print("Delta (median):", df.delta.median())
+
+print("Gamma (mean):", df.gamma.mean())
+print("Gamma (median):", df.gamma.median())
 
 plt.style.use('dark_background')
 
 fig, ax = plt.subplots()
 
-ax.set_title("ETH minute returns vs BTC minute returns")
+ax.set_title("Gamma vs BTC minute returns")
 ax.grid(which='major', color='#666666', linestyle=':')
 ax.minorticks_on()
 ax.grid(which='minor', color='#999999', linestyle='-', alpha=0.2)
 
-ax.scatter(df.eth_returns, df.btc_returns, s=1)
+ax.scatter(df.btc_returns, df.gamma, s=1)
 
 plt.show()
