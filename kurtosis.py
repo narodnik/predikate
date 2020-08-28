@@ -25,6 +25,8 @@ print("Var:", var)
 print("Skew:", df.r.skew())
 print("Kurtosis:", df.r.kurtosis())
 print("N:", len(df))
+print("min:", df.r.min())
+print("max:", df.r.max())
 
 sns.distplot(df.r)
 
