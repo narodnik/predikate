@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy.stats as stats
 import pandas as pd
 from pull_data import n_days_ago, n_hours_ago, pull
 
@@ -26,6 +27,10 @@ print("Kurtosis:", df.r.kurtosis())
 print("N:", len(df))
 
 sns.distplot(df.r)
+
+x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
+plt.plot(x, stats.norm.pdf(x, mu, sigma))
+
 plt.xlim(-0.005, 0.005)
 plt.show()
 
