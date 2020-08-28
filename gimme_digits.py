@@ -56,6 +56,6 @@ for column_name, series in df.iteritems():
     series = series.apply(lambda coin: coin.replace("-return", ""))
     df_r[column_name] = series
 
-df = df_r.iloc[:20]
+df = df_r
 df.to_csv("top_picks.csv")
 #print(df)
