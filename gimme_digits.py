@@ -35,7 +35,7 @@ def fetch_df():
         df_r = df_r.append(df)
 
         print(i, coin_id)
-        time.sleep(20)
+        time.sleep(.15)
 
     print(df_r)
     print()
