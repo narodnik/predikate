@@ -13,36 +13,41 @@ filename = "bitmex-%s-%s-%s" % (symbol, ticks, days_ago)
 #df.to_pickle(filename)
 df = pd.read_pickle(filename)
 
-min_lag = 0
-max_lag = 500
-from_date = df.index[-1] - pd.DateOffset(days=10)
+min_lag = 1
+max_lag = 8 * 60
+date_offset = pd.DateOffset(days=10)
 
-lags = range(0, max_lag)
-changes = [np.log(df.close) - np.log(df.close.shift(lag)) for lag in lags]
-variances = [change.loc[from_date:].var() for change in changes]
+def calculate_hurst(df, min_lag, max_lag, date_offset, plot=True):
+    from_date = df.index[-1] - pd.DateOffset(days=10)
 
-df = pd.DataFrame(variances, columns=["vars"])
-df.index += 1
-df.index = np.log(df.index)
-df.vars = np.log(df.vars)
+    lags = range(min_lag, max_lag)
+    changes = [np.log(df.close) - np.log(df.close.shift(lag)) for lag in lags]
+    variances = [change.loc[from_date:].var() for change in changes]
 
-df.replace([np.inf, -np.inf], np.nan, inplace=True)
-df.dropna(inplace=True)
+    df = pd.DataFrame(variances, index=lags, columns=["vars"])
+    df.index = np.log(df.index)
+    df.vars = np.log(df.vars)
 
-lr = LinearRegression()
-lr.fit(df.index.values.reshape(-1, 1), df.vars.values.reshape(-1, 1))
-m = lr.coef_[0][0]
-c = lr.intercept_[0]
-plt.plot(df.index, df.index * m + c)
+    df.replace([np.inf, -np.inf], np.nan, inplace=True)
+    df.dropna(inplace=True)
 
-print("Slop/intercept:", m, c)
-hurst = m / 2
-print("Hurst exponent:", m / 2)
+    lr = LinearRegression()
+    lr.fit(df.index.values.reshape(-1, 1), df.vars.values.reshape(-1, 1))
+    m = lr.coef_[0][0]
+    c = lr.intercept_[0]
 
-plt.scatter(df.index, df.vars, 0.1)
-plt.show()
+    print("Slope/intercept:", m, c)
+    hurst = m / 2
+    print("Hurst exponent:", m / 2)
 
-#variances = [(np.log(df.close) 
-#print(lags)
-#np.log(df.close) - np.log(df.close.shift(lag)
+    if plot:
+        plt.style.use('dark_background')
+        plt.title("Hurst exponent")
+        plt.plot(df.index, df.index * m + c)
+        plt.scatter(df.index, df.vars, 0.1)
+        plt.show()
+
+    return hurst
+
+hurst = calculate_hurst(df, min_lag, max_lag, date_offset)
 
