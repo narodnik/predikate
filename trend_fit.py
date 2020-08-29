@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import sys
 import time
 from pycoingecko import CoinGeckoAPI
 from scipy import stats
@@ -19,7 +20,8 @@ time_now = int(time.time())
 #time_delta = 91 * 24 * 60 * 60
 time_delta = 12 * 24 * 60 * 60
 
-coin_id = "bitcoin"
+coin_id = sys.argv[1] if len(sys.argv) > 1 else "bitcoin"
+
 chart = cg.get_coin_market_chart_range_by_id(
     coin_id, vs_currency="usd",
     from_timestamp=time_now - time_delta,
@@ -59,5 +61,12 @@ plt.title("Trend for %s. Correlation = %0.2f" % (coin_id, correlation))
 plt.plot(df.index, slope * (df.index - df.index[0]) / pd.Timedelta(minutes=1) + intercept)
 plt.plot(df.index, df.p)
 #plt.scatter(df.index, df.r, 0.1)
-plt.show()
+
+fig_manager = plt.get_current_fig_manager()
+fig_manager.window.showMaximized()
+
+figure = plt.gcf()
+figure.set_size_inches(10, 7)
+plt.savefig("images/trend-%s.png" % coin_id, dpi=100)
+#plt.show()
 
