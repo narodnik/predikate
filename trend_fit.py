@@ -49,6 +49,8 @@ slope, intercept, correlation, p_val_1, stderr_1 = \
     stats.linregress(days, df.p)
 
 print("Correlation: %0.2f" % correlation)
+R = np.exp(slope * 60 * 24)
+print("R: %0.2f" % R)
 
 #days = (r.index - r.index[0]) / pd.Timedelta(minutes=1)
 #slope, intercept, correlation, p_val_1, stderr_1 = \
@@ -57,7 +59,8 @@ print("Correlation: %0.2f" % correlation)
 #print("Correlation:", correlation)
 
 plt.style.use('dark_background')
-plt.title("Trend for %s. Correlation = %0.2f" % (coin_id, correlation))
+plt.title("Trend for %s\n Correlation = %.2f   Daily Return = %.0f %%" % (
+    coin_id, correlation, 100 * R))
 plt.plot(df.index, slope * (df.index - df.index[0]) / pd.Timedelta(minutes=1) + intercept)
 plt.plot(df.index, df.p)
 #plt.scatter(df.index, df.r, 0.1)
