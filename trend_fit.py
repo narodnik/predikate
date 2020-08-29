@@ -62,11 +62,11 @@ plt.plot(df.index, slope * (df.index - df.index[0]) / pd.Timedelta(minutes=1) + 
 plt.plot(df.index, df.p)
 #plt.scatter(df.index, df.r, 0.1)
 
+#figure = plt.gcf()
+#figure.set_size_inches(10, 7)
+#plt.savefig("images/trend-%s.png" % coin_id, dpi=100)
+
 fig_manager = plt.get_current_fig_manager()
 fig_manager.window.showMaximized()
-
-figure = plt.gcf()
-figure.set_size_inches(10, 7)
-plt.savefig("images/trend-%s.png" % coin_id, dpi=100)
-#plt.show()
+plt.show()
 
