@@ -75,6 +75,8 @@ dfh.to_pickle(filename)
 dfh = pd.read_pickle(filename)
 
 print(dfh)
+print("Avg hurst:", dfh.hurst.mean())
+print("Avg var:", dfh.hurst.var())
 
 plt.style.use('dark_background')
 
