@@ -19,5 +19,8 @@ df["r"] = np.log(df.close) - np.log(df.close.shift(1))
 lag = 1
 diff = df.r - df.r.mean()
 corr = (diff * diff.shift(lag)).sum() / (diff**2).sum()
-print(corr)
+print("Autocorrelation:", corr)
+
+avg_return = np.exp(df.r.mean())
+print("Return:", avg_return)
 
