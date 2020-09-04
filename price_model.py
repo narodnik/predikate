@@ -4,6 +4,7 @@ import numpy as np
 import scipy.stats as st
 from pull_data import n_days_ago, n_hours_ago, pull
 
+#days_ago = 60
 #df_btc = pull(start=n_days_ago(days_ago), symbol="XBTUSD")
 #df_btc.to_pickle("bitmex-minutes-60d.pkl")
 df_btc = pd.read_pickle("bitmex-minutes-60d.pkl")
@@ -16,7 +17,7 @@ def analyze(df):
     df['logret'] = np.log(df.close) - np.log(df.close.shift(1))
 
     risk = 0.95
-    time_period = 60 * 24 * 30
+    time_period = 10 * 24 * 30
     var = df.logret.var() * time_period
     z_score = st.norm.ppf(risk)
 

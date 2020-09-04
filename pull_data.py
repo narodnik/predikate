@@ -77,7 +77,11 @@ def pull(start=None, end=None, bin_size="1m", symbol="XBTUSD"):
 
     round_increment = batch_size * binsizes[bin_size]
     for current_round in range(rounds):
-        time.sleep(0.1)
+        print("Round %i / %i" % (current_round + 1, rounds))
+        time.sleep(0.2)
+        if current_round % 25 == 0:
+            print("Pausing a second...")
+            time.sleep(2)
 
         new_time = (start + timedelta(minutes = current_round * round_increment))
         
