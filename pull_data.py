@@ -79,7 +79,7 @@ def pull(start=None, end=None, bin_size="1m", symbol="XBTUSD"):
     for current_round in range(rounds):
         print("Round %i / %i" % (current_round + 1, rounds))
         time.sleep(0.2)
-        if current_round % 25 == 0:
+        if current_round > 0 and current_round % 25 == 0:
             print("Pausing a second...")
             time.sleep(2)
 
