@@ -5,18 +5,18 @@ from pull_data import n_days_ago, n_hours_ago, pull
 
 plt.style.use('dark_background')
 
-days_ago = 180
+days_ago = 10
 
 symbol_perp = "XBTUSD"
-#df = pull(start=n_days_ago(days_ago), symbol=symbol_perp, bin_size="1d")
-#df.to_pickle("bitmex.pkl")
+df = pull(start=n_days_ago(days_ago), symbol=symbol_perp, bin_size="1m")
+df.to_pickle("bitmex.pkl")
 df = pd.read_pickle("bitmex.pkl")
 
 #time.sleep(1)
 
 symbol_futures = "XBTZ20"
-#df = pull(start=n_days_ago(days_ago), symbol=symbol_futures, bin_size="1d")
-#df.to_pickle("bitmex-%s.pkl" % symbol_futures)
+df2 = pull(start=n_days_ago(days_ago), symbol=symbol_futures, bin_size="1m")
+dfs.to_pickle("bitmex-%s.pkl" % symbol_futures)
 df2 = pd.read_pickle("bitmex-%s.pkl" % symbol_futures)
 
 df = pd.concat([df.close, df2.close], keys=["XBTUSD", "XBTZ20"], axis=1)
