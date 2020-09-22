@@ -16,7 +16,7 @@ df = pd.read_pickle("bitmex.pkl")
 
 symbol_futures = "XBTZ20"
 df2 = pull(start=n_days_ago(days_ago), symbol=symbol_futures, bin_size="1m")
-dfs.to_pickle("bitmex-%s.pkl" % symbol_futures)
+df2.to_pickle("bitmex-%s.pkl" % symbol_futures)
 df2 = pd.read_pickle("bitmex-%s.pkl" % symbol_futures)
 
 df = pd.concat([df.close, df2.close], keys=["XBTUSD", "XBTZ20"], axis=1)
