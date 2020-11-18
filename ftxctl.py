@@ -17,14 +17,22 @@ exchange = ccxt.ftx({
     },
 })
 
-print("Positions:")
 for position in exchange.fetch_positions():
-    if position["size"] > 0:
-        #pprint.pprint(position)
-        print(position["future"])
-        print("  PNL:\t", position["realizedPnl"])
-        print("  size:\t", position["size"])
-        print("  liq:\t", position["estimatedLiquidationPrice"])
+    if position["size"] == 0:
+        continue
+
+    #pprint.pprint(position)
+    id = position["future"]
+    print(id)
+    print("  PNL:\t", position["realizedPnl"])
+    print("  size:\t", position["size"])
+    liquidation = position["estimatedLiquidationPrice"]
+    print("  liq:\t", liquidation)
+
+    ticker = exchange.fetch_ticker(id)
+    last = ticker["last"]
+    print("  last price:\t", last)
+    print("  risk:\t %.2f%%" % (100 * (last - liquidation) / liquidation))
 
 def show_btc_markets(exchange):
     print("BTC markets:")
