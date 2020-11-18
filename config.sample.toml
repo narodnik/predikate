@@ -1,4 +1,6 @@
 bitmex_api_key = "BITMEX_API_KEY"
 bitmex_api_secret = "BITMEX_API_SECRET"
 alarm_music = "/path/to/music/rick-astley_never-gonna-give-you-up.mp3"
+ftx_api_key = "FTX_API_KEY"
+ftx_api_secret = "FTX_API_SECRET"
 
