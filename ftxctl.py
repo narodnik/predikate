@@ -33,7 +33,7 @@ for position in exchange.fetch_positions():
     last = ticker["last"]
     print("  last price:\t", last)
     print("  risk:\t %.2f%%" % (
-        100 * (1 - ((last - liquidation) / liquidation))))
+        100 * (1 - ((last - liquidation) / last))))
 
 def show_btc_markets(exchange):
     print("BTC markets:")
