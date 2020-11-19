@@ -17,6 +17,8 @@ exchange = ccxt.ftx({
     },
 })
 
+total_pnl = 0
+
 for position in exchange.fetch_positions():
     if position["size"] == 0:
         continue
@@ -24,7 +26,9 @@ for position in exchange.fetch_positions():
     #pprint.pprint(position)
     id = position["future"]
     print(id)
-    print("  PNL:\t", position["realizedPnl"])
+    pnl = position["realizedPnl"]
+    total_pnl += pnl
+    print("  PNL:\t", pnl)
     print("  size:\t", position["size"])
     liquidation = position["estimatedLiquidationPrice"]
     print("  liq:\t", liquidation)
@@ -34,6 +38,9 @@ for position in exchange.fetch_positions():
     print("  last price:\t", last)
     print("  risk:\t %.2f%%" % (
         100 * (1 - ((last - liquidation) / last))))
+
+print()
+print("Total PNL:", total_pnl)
 
 def show_btc_markets(exchange):
     print("BTC markets:")
