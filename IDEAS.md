@@ -6,4 +6,5 @@
 * Asia dump time
 * Place bids, model price change with high kurtosis
 * Visualize aggregate orderbook data
+* Alert for new coin releases
 
