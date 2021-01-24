@@ -7,4 +7,7 @@
 * Place bids, model price change with high kurtosis
 * Visualize aggregate orderbook data
 * Alert for new coin releases
+* Correlation across markets
+  * DeFi coins and sub-categories
+  * USD, stocks, tech stocks, Tesla and Gold/Silver
 
