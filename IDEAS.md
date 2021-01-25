@@ -10,4 +10,5 @@
 * Correlation across markets
   * DeFi coins and sub-categories
   * USD, stocks, tech stocks, Tesla and Gold/Silver
+* USDT/BTC volume effect on BTC price
 
