@@ -23,14 +23,19 @@ for i in range(number_orders):
 
     price = randomize(price, 0.0005)
     amount = randomize(amount, 0.2)
-
-    print("%i %.4f" % (price, amount))
-    calc_total_amount += amount
-    average_price += price
+    
+    if i < (number_orders -1):
+        print("%i %.4f" % (price, amount))
+        calc_total_amount += amount
+        average_price += price
+    else:
+        amount = total_amount - calc_total_amount
+        calc_total_amount += amount
+        print("%i %.4f" % (price, amount))
 
 average_price /= number_orders
 
-print()
+# final amount should be the same as initial amount
 print("Final amount: %.4f" % calc_total_amount)
 print("Average price: %i" % average_price)
 
