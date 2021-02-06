@@ -27,11 +27,10 @@ for i in range(number_orders):
 
     print("%i %.4f" % (price, amount))
 
-    if i < (number_orders -1):
-        calc_total_amount += amount
-    else:
+    if i == (number_orders -1):
         amount = total_amount - calc_total_amount
-        calc_total_amount += amount
+
+    calc_total_amount += amount
 
 average_price /= number_orders
 
