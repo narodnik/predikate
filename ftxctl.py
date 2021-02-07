@@ -40,7 +40,7 @@ for position in exchange.fetch_positions():
         100 * (1 - ((last - liquidation) / last))))
 
 print()
-print("Total PNL:", total_pnl)
+print("Total PNL: $%.2f" % total_pnl)
 
 def show_btc_markets(exchange):
     print("BTC markets:")

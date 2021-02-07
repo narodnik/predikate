@@ -12,3 +12,4 @@
   * USD, stocks, tech stocks, Tesla and Gold/Silver
 * USDT/BTC volume effect on BTC price
 
+Hypothesis to test: when I place a larger order this creates upwards price pressure because of front running.
