@@ -1,9 +1,9 @@
 import random
 
-total_amount = 0.1
+total_amount = 0.25
 number_orders = 10
-start = 33667
-end = 32161
+start = 40215
+end = 50000
 
 increment = (end - start) / (number_orders - 1)
 betsize = total_amount / number_orders
@@ -23,14 +23,18 @@ for i in range(number_orders):
 
     price = randomize(price, 0.0005)
     amount = randomize(amount, 0.2)
+    average_price += price
 
     print("%i %.4f" % (price, amount))
+
+    if i == (number_orders -1):
+        amount = total_amount - calc_total_amount
+
     calc_total_amount += amount
-    average_price += price
 
 average_price /= number_orders
 
-print()
+# final amount should be the same as initial amount
 print("Final amount: %.4f" % calc_total_amount)
 print("Average price: %i" % average_price)
 
