@@ -1,0 +1,19 @@
+I have an account with 0.1 BTC and opened a position on BTC-PERP for
+0.1948 BTC.
+
+The Estimated Liquidation Price shown is 25989 and the mark price is
+38158. The open price is 37813.
+
+Therefore the position Notional Size = 0.1948 * 38158 = $7433 (well it
+displays $7525.78 but close enough).
+
+Using the formula from here
+https://help.ftx.com/hc/en-us/articles/360027668712-Liquidations
+
+I also multiply the collateral by 0.9 since it's denominated in BTC.
+
+Estimated Liquidation Price = Mark Price * ( 1 + Maintenance margin
+requirement - Total Collateral / Total Notional Size )
+
+= 38158*(1 + 0.04 - 0.9*0.08*38000/7425)
+= 25623
