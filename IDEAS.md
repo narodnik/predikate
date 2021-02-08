@@ -1,4 +1,6 @@
 * Historical volatility
+  * Over 1 week, 2 weeks and 1 month on 1m, 1d returns
+  * Table which shows how these change
 * Futures premiums
 * Implied volatility / options 25delta skew
 * Perpetual swaps funding
