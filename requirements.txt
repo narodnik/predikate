@@ -10,7 +10,7 @@ jsonpointer==2.0
 jsonref==0.2
 jsonschema==3.2.0
 kiwisolver==1.2.0
-lxml==4.5.2
+lxml==4.6.5
 matplotlib==3.2.2
 monotonic==1.5
 mplfinance==0.12.6a3
