@@ -2,7 +2,7 @@ attrs==19.3.0
 bitmex==0.2.2
 bravado==10.6.2
 bravado-core==5.17.0
-certifi==2020.6.20
+certifi==2022.12.7
 chardet==3.0.4
 cycler==0.10.0
 idna==2.10
